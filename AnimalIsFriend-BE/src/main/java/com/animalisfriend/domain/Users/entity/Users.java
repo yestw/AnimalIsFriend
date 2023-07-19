@@ -1,4 +1,4 @@
-package com.animalisfriend.domain.Users.entity;
+package com.animalisfriend.domain.users.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.animalisfriend.domain.Users.dto.UserSignupRequestDto;
+import com.animalisfriend.domain.users.dto.UserSignupRequestDto;
 import com.animalisfriend.global.common.entity.BaseEntity;
 
 import lombok.Builder;
@@ -27,19 +27,14 @@ public class Users extends BaseEntity {
 	private String userName;
 	@Column(length = 12)
 	private String userHp;
-	@Column
 	private String userAddress;
 	@Column(length = 20)
 	private String userNickname;
-	@Column
 	private String userGender;
 	@Enumerated(EnumType.STRING)
-	@Column
 	private Provider provider;
-	@Column
 	private String providerId;
 	@Enumerated(EnumType.STRING)
-	@Column
 	private UserRole role;
 
 	@Builder

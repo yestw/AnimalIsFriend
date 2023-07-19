@@ -1,4 +1,4 @@
-package com.animalisfriend.domain.Users.exception;
+package com.animalisfriend.domain.users.exception;
 
 import com.animalisfriend.global.Error.code.ErrorCode;
 import com.animalisfriend.global.Error.exception.BusinessExceptionHandler;

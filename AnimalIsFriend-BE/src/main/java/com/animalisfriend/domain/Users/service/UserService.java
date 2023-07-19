@@ -1,11 +1,11 @@
-package com.animalisfriend.domain.Users.service;
+package com.animalisfriend.domain.users.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.animalisfriend.domain.Users.dto.UserSignupRequestDto;
-import com.animalisfriend.domain.Users.exception.UserNotFoundException;
-import com.animalisfriend.domain.Users.repository.UserRepository;
+import com.animalisfriend.domain.users.dto.UserSignupRequestDto;
+import com.animalisfriend.domain.users.exception.UserNotFoundException;
+import com.animalisfriend.domain.users.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

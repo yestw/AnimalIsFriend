@@ -1,4 +1,4 @@
-package com.animalisfriend.domain.Users.dto;
+package com.animalisfriend.domain.users.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

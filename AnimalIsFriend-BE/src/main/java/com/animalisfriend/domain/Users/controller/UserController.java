@@ -1,4 +1,4 @@
-package com.animalisfriend.domain.Users.controller;
+package com.animalisfriend.domain.users.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.animalisfriend.domain.Users.dto.UserSignupRequestDto;
-import com.animalisfriend.domain.Users.service.UserService;
+import com.animalisfriend.domain.users.dto.UserSignupRequestDto;
+import com.animalisfriend.domain.users.service.UserService;
 import com.animalisfriend.global.Error.code.SuccessCode;
 import com.animalisfriend.global.security.jwt.dto.JwtAuthentication;
 

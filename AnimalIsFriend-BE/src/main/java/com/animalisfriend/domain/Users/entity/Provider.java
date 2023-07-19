@@ -1,4 +1,4 @@
-package com.animalisfriend.domain.Users.entity;
+package com.animalisfriend.domain.users.entity;
 
 public enum Provider {
 	GOOGLE, KAKAO
