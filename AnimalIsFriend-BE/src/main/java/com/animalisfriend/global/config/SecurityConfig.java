@@ -43,11 +43,11 @@ public class SecurityConfig {
 			.and()
 		//요청에 대한 권한 설정
 
-			.authorizeHttpRequests()
-			.antMatchers("/login/**", "/oauth2/**").permitAll()
-			.antMatchers("/api/v1/user/**").hasAuthority("USER")
-			.anyRequest().authenticated()
-			.and()
+			// .authorizeHttpRequests()
+			// .antMatchers("/login/**", "/oauth2/**").permitAll()
+			// .antMatchers("/api/v1/user/**", "/api/v1/pet/**").hasAuthority("USER")
+			// .anyRequest().authenticated()
+			// .and()
 			.httpBasic().disable()
 			.formLogin().disable()
 			.logout().disable()
