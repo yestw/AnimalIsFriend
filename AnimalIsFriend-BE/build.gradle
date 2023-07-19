@@ -58,6 +58,12 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
+    //websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+    //aws
+    implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.4'
+
     //test
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
