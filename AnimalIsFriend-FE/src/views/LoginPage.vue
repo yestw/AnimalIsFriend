@@ -20,6 +20,7 @@
           width="290"
         />
         <p></p>
+        <p><button @click="toHome()">홈으로</button></p>
       </div>
     </div>
   </div>
@@ -47,6 +48,9 @@ export default {
     ToGoogleLogin() {
       location.href = this.GoogleLogin;
     },
+    toHome() {
+      this.$router.push("/");
+    }
   },
 };
 </script>
