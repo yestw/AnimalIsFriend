@@ -59,7 +59,14 @@ public enum ErrorCode {
 
 	//user
 	USER_NOT_FOUND(404, "U001", "사용자가 존재하지 않습니다."),
-	USER_DUPLICATION(409,"U002", "사용자가 이미 존재합니다."),
+	USER_DUPLICATION(500,"U002", "사용자가 이미 존재합니다."),
+
+	//pet
+	PET_NOT_FOUND(404, "P001", "반려동물이 존재하지 않습니다."),
+
+	//chatroom
+	CHATROOM_ALREADY_EXIST(500, "R001", "이미 채팅방이 존재합니다."),
+	CANNOT_CREATE_CHATROOM(500, "R002", "자기 자신을 대상으로 한 채팅방은 만들 수 없습니다."),
 
 	//token
 	TOKEN_EXPIRED(401, "T001", "만료된 토큰입니다."),

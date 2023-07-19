@@ -17,7 +17,14 @@ public enum SuccessCode {
 	// 수정 성공 코드 (HTTP Response: 201 Created)
 	UPDATE_SUCCESS(204, "204", "UPDATE SUCCESS"),
 
+	//user
 	SIGNUP_SUCCESS(200, "US001", "회원가입이 완료되었습니다."),
+
+	//chatROOM
+	CHATROOM_CREATE_SUCCESS(200, "R001", "채팅방이 개설되었습니다."),
+
+	//pet
+	PET_REGISTER_SUCCESS(200, "PS001", "펫 등록이 완료되었습니다."),
 
 	; // End
 
