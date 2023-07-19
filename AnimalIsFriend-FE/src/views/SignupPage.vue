@@ -24,12 +24,11 @@
       <button @click="signupUser()">회원가입</button>
       <br>
       <router-link to="/">홈으로</router-link>
-      <h1>{{ accessToken }}</h1>
     </div>
   </template>
   
     <script>
-    import { signUp } from "../service/api";
+    import { signUp } from "../service/api/users";
   
     export default {
       data() {
@@ -49,16 +48,23 @@
       methods: {
         async signupUser() {
           try {
-            const signupForm = {
-              userName: this.userName,
-              userHp: this.hp1 + this.hp2 + this.hp3,
-              userGender: this.userGender,
-              userAddress: this.userAddress,
-            };
-            alert("sadasdasdsd");
-            const res = signUp(signupForm, this.$getAccessToken());
-            console.log(res);
-            alert(res);
+            if(this.userName === "" || this.userHp === "" ||
+               this.userGender === "" || this.userAddress === "" ) {
+                alert("빈칸을 모두 채워주세요");
+            } else {
+              const signupForm = {
+                userName: this.userName,
+                userHp: this.hp1 + this.hp2 + this.hp3,
+                userGender: this.userGender,
+                userAddress: this.userAddress,
+              };
+              const res = await signUp(signupForm, this.$getAccessToken());
+              if(res.data === "SIGNUP_SUCCESS") {
+                alert("회원가입이 완료되었습니다. 다시 로그인 해주세요");
+                document.cookie = "accessTokenCookie=; path=/; domain=localhost; SameSite=None; Secure; Max-Age=0;";
+                location.href = "/";
+              }
+            }
           } catch(err) {
             console.log(err);
           }
