@@ -1,9 +1,5 @@
 package com.animalisfriend.global.security.oauth.service;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -11,11 +7,11 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import com.animalisfriend.domain.Users.entity.Provider;
-import com.animalisfriend.domain.Users.entity.UserRole;
-import com.animalisfriend.domain.Users.entity.Users;
-import com.animalisfriend.domain.Users.exception.UserNotFoundException;
-import com.animalisfriend.domain.Users.repository.UserRepository;
+import com.animalisfriend.domain.users.entity.Provider;
+import com.animalisfriend.domain.users.entity.UserRole;
+import com.animalisfriend.domain.users.entity.Users;
+import com.animalisfriend.domain.users.exception.UserNotFoundException;
+import com.animalisfriend.domain.users.repository.UserRepository;
 import com.animalisfriend.global.security.oauth.dto.CustomOAuth2User;
 import com.animalisfriend.global.security.oauth.dto.OAuth2UserInfo;
 import com.animalisfriend.global.security.oauth.dto.OAuth2UserInfoFactory;

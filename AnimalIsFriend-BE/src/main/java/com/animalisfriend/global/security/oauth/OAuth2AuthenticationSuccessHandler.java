@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.animalisfriend.domain.users.entity.UserRole;
 import com.animalisfriend.global.security.jwt.JwtTokenProvider;
 import com.animalisfriend.global.security.oauth.dto.CustomOAuth2User;
 import com.animalisfriend.global.security.oauth.repository.CookieAuthorizationRequestRepository;
@@ -52,6 +53,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
 		setAccessTokenInCookie(response, accessToken);
 		setRefreshTokenInCookie(response, accessToken);
+
+
+		if(oAuth2User.getUser().getRole() == UserRole.GUEST) {
+			targetUrl+="/signup";
+		}
+
+		log.info("targetUrl : {}", targetUrl);
 
 		response.sendRedirect(targetUrl);
 	}

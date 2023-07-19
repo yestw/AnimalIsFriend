@@ -1,9 +1,8 @@
 package com.animalisfriend.global.security.oauth.dto;
 
-import java.security.AuthProvider;
 import java.util.Map;
 
-import com.animalisfriend.domain.Users.entity.Provider;
+import com.animalisfriend.domain.users.entity.Provider;
 import com.animalisfriend.global.security.oauth.exception.ProviderNotFoundException;
 
 public class OAuth2UserInfoFactory {

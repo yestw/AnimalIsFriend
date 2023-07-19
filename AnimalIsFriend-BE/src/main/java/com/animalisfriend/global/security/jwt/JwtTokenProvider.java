@@ -11,7 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.animalisfriend.domain.Users.entity.Users;
+import com.animalisfriend.domain.users.entity.Users;
 import com.animalisfriend.global.security.jwt.dto.JwtAuthentication;
 import com.animalisfriend.global.security.jwt.dto.RefreshTokenSaveRequestDto;
 import com.animalisfriend.global.security.jwt.exception.TokenExpiredException;
