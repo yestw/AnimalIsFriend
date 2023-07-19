@@ -54,3 +54,17 @@ jwt:
   header:
     access-token: Authorization
     refresh-token: Authorization-refresh
+
+
+cloud:
+  aws:
+    s3:
+      bucket: ${AWS_IMAGE_BUCKET}
+    credentials:
+      access-key: ${AWS_ACCESS_KEY_ID}
+      secret-key: ${AWS_SECRET_KEY_ID}
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
