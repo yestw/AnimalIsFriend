@@ -8,6 +8,7 @@
         <li><button @click="goPetRegister()">반려동물 등록</button></li>
         <li><button @click="goPetView()">반려동물 조회</button></li>
         <li><button @click="noService()">입양 할게요</button></li>
+        <li><button @click="goChatRoom()">채팅방</button></li>
       </ul>
     </div>
     <div id="tab">
@@ -71,6 +72,9 @@ export default {
     },
     noService() {
       alert("아직 준비중인 서비스 입니다.");
+    },
+    goChatRoom() {
+      this.$router.push("/chatroom");
     }
   },
 }
@@ -101,6 +105,7 @@ button:hover {
   align-items: center;
   justify-content: center;
   border-radius: 50px;
+  margin-right: 30px;
 }
 
 #logo:hover {
@@ -121,7 +126,7 @@ button:hover {
 
 #tab {
   float: right;
-  width: 30rem;
+  width: 20rem;
   display: flex;
   align-items: center;
   justify-content: center;
