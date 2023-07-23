@@ -18,7 +18,7 @@
           </div>
           <div
             @click="ToChatting(
-              i.chatroomId, i.unReadChatCoun, i.chatroomName, i.imageUrl, i.petId, i.petStatus, i.isPetOwner
+              i.chatroomId, i.unReadChatCount, i.chatroomName, i.imageUrl, i.petId, i.petStatus, i.isPetOwner
             )"
           >
             <div class="row">
@@ -28,7 +28,7 @@
                   <div class="last-msg">
                     {{ i.creatorName }}
                   </div>
-                  <div v-if="i.unReadChatCount">
+                  <div v-if="i.unReadChatCount" id="unread-box">
                     {{ i.unReadChatCount }}
                   </div>
                 </div>
@@ -36,7 +36,7 @@
                   <div class="last-msg">
                     {{ i.invitedName }}
                   </div>
-                  <div v-if="i.unReadChatCount">
+                  <div v-if="i.unReadChatCount" id="unread-box">
                     {{ i.unReadChatCount }}
                   </div>
                 </div>
@@ -147,6 +147,12 @@ body {
   margin: 0 auto;
   width: 100%;
   height: 100%;
+}
+
+#unread-box {
+  width: 10px;
+  height: 10px;
+  background-color: red;
 }
 
 </style>

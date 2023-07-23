@@ -6,7 +6,6 @@
     <label for="file">
       <img :src="imageUrl" id="img-box" />
     </label>
-    <div>{{ petId }}</div>
     <div v-if="isPetOwner > 0">
       <select v-model="petStatus">
         <option selected>{{ petStatus }}</option>
@@ -96,7 +95,7 @@ export default {
     this.chatroomName = this.$route.params.chatroomName;
     this.petId = this.$route.params.petId;
     this.isPetOwner = this.$route.params.isPetOwner;
-    this.imageUrl = this.$route.params.petId;
+    this.imageUrl = this.$route.params.imageUrl;
     this.petStatus = this.$route.params.petStatus;
     this.petStatus = this.petStatus === "NOT_ADOPTED" ? "미입양" :
                      this.petStatus === "ADOPTION_WAITING" ? "입양 대기중" :
@@ -178,7 +177,7 @@ export default {
         })
       }
     },
-    send() {
+    async send() {
       const chatDto = {
         senderId: this.userId,
         message: this.message,
@@ -189,13 +188,15 @@ export default {
         alert("채팅을 입력해주세요.")
         return;
       } else if(this.stompClient) {
-        this.stompClient.send(`/pub/queue/${this.roomId}`, JSON.stringify(chatDto));
+        await this.stompClient.send(`/pub/queue/${this.roomId}`, JSON.stringify(chatDto));
+        await this.readChatRequest();
       }
     },
-    webSocketConnect() {
+    async webSocketConnect() {
       const serverUrl = process.env.VUE_APP_WEBSOCKET_URL
       const socket = new SockJS(serverUrl + "/ws");
       this.stompClient = Stomp.over(socket);
+      await this.readChatRequest();
 
       this.stompClient.connect(
         {
@@ -204,7 +205,6 @@ export default {
         frame => {
           this.connected = true;
           console.log("소켓 연결 성공", frame)
-          this.readChatRequest();
           this.stompClient.subscribe(`/queue/${this.roomId}`, (res) => {
             // console.log("구독으로 받은 메세지", res.body);
 
@@ -221,6 +221,7 @@ export default {
             chatting.createdDate = formattedDate;
 
             this.messageList.unshift(chatting);
+            
           });
         },
         error => {
@@ -291,7 +292,7 @@ export default {
 .other-chat {
   margin: 10px;
   text-align: left;
-  background-color: rgb(232, 172, 172);
+  background-color: white;
   border-radius: 20px;
   padding: 10px;
   word-wrap: break-word;
@@ -329,8 +330,11 @@ export default {
 #img-box {
   border-radius: 10px solid black;
   margin: 0 auto;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 30%;
+  border-radius: 50px;
+  text-align: center;
+  display: flex;
 }
 
 </style>
