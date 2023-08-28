@@ -5,7 +5,6 @@ import java.util.Objects;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import com.animalisfriend.domain.pets.entity.PetSize;
 import com.animalisfriend.domain.pets.entity.PetStatus;
 
 @Converter

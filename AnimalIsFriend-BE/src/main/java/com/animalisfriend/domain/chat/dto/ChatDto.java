@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import com.animalisfriend.domain.chat.entity.Chat;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

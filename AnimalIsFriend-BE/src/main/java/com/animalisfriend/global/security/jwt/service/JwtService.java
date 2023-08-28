@@ -1,6 +1,5 @@
 package com.animalisfriend.global.security.jwt.service;
 
-import java.net.http.HttpRequest;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;

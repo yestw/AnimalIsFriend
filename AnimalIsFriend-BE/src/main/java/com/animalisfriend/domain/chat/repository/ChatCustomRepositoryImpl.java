@@ -2,22 +2,16 @@ package com.animalisfriend.domain.chat.repository;
 
 import static com.animalisfriend.domain.chat.entity.QChat.*;
 import static com.animalisfriend.domain.chat.entity.QChatRoom.*;
-import static com.querydsl.jpa.JPAExpressions.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.animalisfriend.domain.chat.dto.request.ChatRequestDto;
-import com.animalisfriend.domain.chat.dto.response.ChatResponseDto;
 import com.animalisfriend.domain.chat.entity.Chat;
 import com.animalisfriend.domain.chat.entity.ChatRoom;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;

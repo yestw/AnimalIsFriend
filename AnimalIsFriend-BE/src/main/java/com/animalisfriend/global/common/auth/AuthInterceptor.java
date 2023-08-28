@@ -1,14 +1,11 @@
 package com.animalisfriend.global.common.auth;
 
 import java.io.IOException;
-import java.security.Permission;
-import java.util.Collection;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -28,7 +25,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
-		//
 		if( !(handler instanceof HandlerMethod)) {
 			return true;
 		}
@@ -39,10 +35,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 		if(Objects.isNull(authRequired)) {
 			return true;
 		}
-
-		// String requestURI = request.getRequestURI();
-		//
-		// log.info("requestURI : {}" , requestURI);
 
 		String role = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 

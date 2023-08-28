@@ -54,8 +54,6 @@ public class JwtTokenProvider {
 		Claims claims = Jwts.claims().setSubject(user.getId().toString());
 		claims.put("role", user.getRole());
 
-		log.info("create AccessToken : {}", claims.toString());
-
 		Date now = new Date();
 		Date expiredDate = new Date(now.getTime() + accessTokenExpireSeconds * 1000L);
 
@@ -136,15 +134,11 @@ public class JwtTokenProvider {
 	public JwtAuthenticationToken getAuthentication(String accessToken) {
 		Claims claims = getClaims(accessToken);
 
-		log.info("claims : {}", claims.toString());
-
 		Long userId = Long.valueOf(claims.get("sub", String.class));
 		String role = claims.get("role", String.class);
 
 		JwtAuthentication principal = new JwtAuthentication(accessToken, userId, role);
 		List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
-
-		log.info("getAuthentication : {}", principal);
 
 		return new JwtAuthenticationToken(authorities, principal, null);
 	}

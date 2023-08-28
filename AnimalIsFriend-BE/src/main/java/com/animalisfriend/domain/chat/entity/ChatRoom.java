@@ -1,6 +1,5 @@
 package com.animalisfriend.domain.chat.entity;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Formula;
 
 import com.animalisfriend.domain.pets.entity.Pets;
 import com.animalisfriend.domain.users.entity.Users;

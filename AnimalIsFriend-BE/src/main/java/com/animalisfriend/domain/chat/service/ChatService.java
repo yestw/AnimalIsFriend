@@ -1,11 +1,7 @@
 package com.animalisfriend.domain.chat.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.swing.text.html.Option;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,10 +101,6 @@ public class ChatService {
 		Users user = userRepository.findById(dto.getSenderId())
 				.orElseThrow(() -> new UserNotFoundException());
 
-
-		log.info("result : {}", dto.getReadChat());
-		log.info("result : {}", dto.getSenderId() == user.getId());
-
 		if(dto.getSenderId() != user.getId()) {
 			if(dto.getReadChat()) {
 				readFlag = !readFlag;
@@ -138,8 +130,6 @@ public class ChatService {
 
 	@Transactional
 	public void readChat(ChatRequestDto.ReadChatRequest dto, Long userId) {
-
-		log.info("service readChat 실행되었니?");
 
 		userRepository.findById(userId)
 			.orElseThrow(() -> new UserNotFoundException());

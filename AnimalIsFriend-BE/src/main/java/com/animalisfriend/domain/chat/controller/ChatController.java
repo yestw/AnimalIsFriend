@@ -65,10 +65,6 @@ public class ChatController {
 		@ModelAttribute ChatRequestDto.findChatPagination dto,
 		@AuthenticationPrincipal JwtAuthentication user) {
 
-		log.info("제발 : {}", chatroomId);
-		log.info("제발 : {}", dto.getChatId());
-		log.info("제발 : {}", dto.getRequestDate());
-
 		return ResponseEntity.ok().body(chatService.findChatByChatRoom(chatroomId, dto, user.userId));
 	}
 
@@ -78,10 +74,6 @@ public class ChatController {
 		@ModelAttribute ChatRequestDto.ReadChatRequest dto,
 		@AuthenticationPrincipal JwtAuthentication user) {
 
-
-		log.info("제발 : {}", dto.getChatroomId());
-		log.info("제발 : {}", dto.getReadChat());
-		log.info("readChat 실행되었니?");
 		chatService.readChat(dto, user.userId);
 	}
 }

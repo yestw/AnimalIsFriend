@@ -1,7 +1,5 @@
 package com.animalisfriend.global.aws.service;
 
-import static org.springframework.boot.context.properties.bind.Bindable.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;

@@ -28,7 +28,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
-		log.info("--------------loadUser------------- 실행");
 		OAuth2UserService oAuth2UserService = new DefaultOAuth2UserService();
 		OAuth2User oAuth2User = oAuth2UserService.loadUser(oAuth2UserRequest);
 
@@ -36,12 +35,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 		String registrationId = oAuth2UserRequest.getClientRegistration().getRegistrationId();
 		Provider provider = getProvider(registrationId);
 
-		// log.info("oauth2user : {}", oAuth2User.getAttributes());
-
 		OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(provider, oAuth2User.getAttributes());
 
-		// log.info("oauth2userInfo : {}", oAuth2UserInfo.getName());
-		// log.info("oauth2userInfo : {}", oAuth2UserInfo.getOAuth2Id());
 		Users users = userRepository.findByProviderId(oAuth2UserInfo.getOAuth2Id())
 			.orElseGet(() -> registerUser(provider, oAuth2UserInfo));
 
@@ -52,8 +47,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 
 	private Provider getProvider(String registrationId) {
-		log.info("--------------getProvider------------- 실행");
-		log.info("registrationId : {}", registrationId);
 		switch (registrationId) {
 			case "google":
 				return Provider.GOOGLE;
@@ -66,8 +59,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 
 	private Users registerUser(Provider provider, OAuth2UserInfo oAuth2UserInfo) {
-		log.info("--------------registerUser------------- 실행");
-
 		Users user = Users.builder()
 			.userNickname(oAuth2UserInfo.getName())
 			.providerId(oAuth2UserInfo.getOAuth2Id())

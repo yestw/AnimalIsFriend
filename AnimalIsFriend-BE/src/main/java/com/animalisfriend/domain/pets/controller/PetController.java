@@ -3,7 +3,6 @@ package com.animalisfriend.domain.pets.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,7 +21,6 @@ import com.animalisfriend.global.Error.code.SuccessCode;
 import com.animalisfriend.global.common.auth.AuthRequired;
 import com.animalisfriend.global.security.jwt.dto.JwtAuthentication;
 
-import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,9 +36,6 @@ public class PetController {
 	@AuthRequired
 	public ResponseEntity<Object> registerPet(@RequestBody PetRequestDto.PetRegister dto,
 		@AuthenticationPrincipal JwtAuthentication user) {
-
-		log.info("imageurl : {}", dto.getImageUrl());
-
 		petService.petRegister(dto, user.userId);
 
 		return ResponseEntity.ok().body(SuccessCode.PET_REGISTER_SUCCESS);
@@ -60,9 +55,6 @@ public class PetController {
 	@AuthRequired
 	public ResponseEntity<Object> updatePetStatus(@RequestBody AdoptRequestDto.updateAdopt dto,
 		@AuthenticationPrincipal JwtAuthentication user) {
-
-		log.info("status : {}", dto.getPetStatus());
-
 		petService.updatePetStatus(dto, user.userId);
 
 		return ResponseEntity.ok().body(SuccessCode.UPDATE_SUCCESS);

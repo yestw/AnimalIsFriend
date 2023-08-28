@@ -41,7 +41,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) throws IOException {
-		log.info("onAuthenticationSuccess");
 
 		CustomOAuth2User oAuth2User = (CustomOAuth2User)authentication.getPrincipal();
 		String targetUrl = determineTargetUrl(request, response, authentication);
@@ -58,8 +57,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		if(oAuth2User.getUser().getRole() == UserRole.GUEST) {
 			targetUrl+="/signup";
 		}
-
-		log.info("targetUrl : {}", targetUrl);
 
 		response.sendRedirect(targetUrl);
 	}
@@ -89,7 +86,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
 	protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) {
-		log.info("determineTargetUrl");
 		Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
 			.map(Cookie::getValue);
 		String targetUrl = redirectUri.orElse(getDefaultTargetUrl());

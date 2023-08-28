@@ -2,7 +2,6 @@ package com.animalisfriend.domain.pets.dto.request;
 
 import com.animalisfriend.domain.pets.entity.PetCategory;
 import com.animalisfriend.domain.pets.entity.PetSize;
-import com.animalisfriend.domain.pets.entity.PetStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

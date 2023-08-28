@@ -3,7 +3,6 @@ package com.animalisfriend.domain.chat.repository;
 import java.util.List;
 
 import com.animalisfriend.domain.chat.dto.request.ChatRequestDto;
-import com.animalisfriend.domain.chat.dto.response.ChatResponseDto;
 import com.animalisfriend.domain.chat.entity.Chat;
 import com.animalisfriend.domain.chat.entity.ChatRoom;
 
