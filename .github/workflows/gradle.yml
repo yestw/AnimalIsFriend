@@ -1,10 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
 name: Spring boot & Gradle CI/CD
 
 # Event Trigger
@@ -19,18 +12,53 @@ permissions:
 
 jobs:
   build:
-
     # 실행 환경 지정
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Set up JDK 11
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v1
       with:
         java-version: '11'
-        distribution: 'temurin'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # Build
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
+      run: ./gradlew clean build
+
+    # 전송할 파일을 담을 디렉토리 생성
+    - name: Make Directory for deliver
+      run: mkdir deploy
+
+    # Jar 파일 copy
+    - name: Copy Jar
+      run: cp ./build/libs/*.jar ./deploy/
+
+    # 압축 파일 형태로 전달
+    - name: Mkae zip file
+      run: zip -r -qq -j ./springboot -intro-build.zip ./deploy
+
+    # S3 Bucket으로 copy
+    - name: Deliver to AWS S3
+      env :
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_IMAGE_BUCKET: ${{ secrets.AWS_IMAGE_BUCKET }}
+        BACK_END: ${{ secrets.BACK_END }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_URL: ${{ secrets.DB_URL }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        FRONT_END: ${{ secrets.FRONT_END }}
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+        KAKAO_CLIENT_ID: ${{ secrets.KAKAO_CLIENT_ID }}
+        KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
+      run: |
+        aws s3 cp \
+        --region ap-northeast-2 \
+        --acl private \ ./springboot-intro-build.zip s3://springboot-intro-build/
