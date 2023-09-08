@@ -17,12 +17,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x ./AnimalIsFriend-BE/gradlew
-      shell: bash
-
-    - name: Build with Gradle
-      run: ./AnimalIsFriend-BE/gradlew build
+    - name: Change Directory and Build with Gradle
+      run: |
+        cd AnimalIsFriend-BE
+        chmod +x ./gradlew
+        ./gradlew build
       shell: bash
     
     - name: Set up JDK 11
