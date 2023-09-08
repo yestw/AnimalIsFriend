@@ -38,7 +38,7 @@ public class PetController {
 		@AuthenticationPrincipal JwtAuthentication user) {
 		petService.petRegister(dto, user.userId);
 
-		return ResponseEntity.ok().body(SuccessCode.PET_REGISTER_SUCCESS);
+		return ResponseEntity.ok().body(SuccessCode.PET_REGISTER_SUCCESS); 
 	}
 
 	@GetMapping
