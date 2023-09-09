@@ -66,7 +66,7 @@ export default {
       this.$router.push("/");
     },
     logout() {
-      document.cookie = "accessTokenCookie=; path=/; domain=localhost; SameSite=None; Secure; Max-Age=0;";
+      document.cookie = "accessTokenCookie=; path=/; domain=.animalisfriend.shop; SameSite=None; Secure; Max-Age=0;";
       this.isLogined = false;
       location.href = "/";
     },
