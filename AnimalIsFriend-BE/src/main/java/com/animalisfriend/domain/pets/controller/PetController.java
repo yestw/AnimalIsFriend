@@ -37,7 +37,7 @@ public class PetController {
 	public ResponseEntity<Object> registerPet(@RequestBody PetRequestDto.PetRegister dto,
 		@AuthenticationPrincipal JwtAuthentication user) {
 		petService.petRegister(dto, user.userId);
- 
+
 		return ResponseEntity.ok().body(SuccessCode.PET_REGISTER_SUCCESS);
 	}
 
