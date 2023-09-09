@@ -78,14 +78,12 @@ export default {
 
       const res = await getChatRoom(accessToken);
       this.chatrooms = res.data;
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
   },
   methods: {
     ToChatting(chatroomId, unReadChatCount, chatroomName, imageUrl, petId, petStatus, isPetOwner) {
-      console.log(chatroomId);
       this.$router.push(
         {
           name: "messenger",

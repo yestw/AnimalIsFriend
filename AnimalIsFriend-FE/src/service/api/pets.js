@@ -17,7 +17,6 @@ async function register(form, accessToken) {
     };
     const res = await axios.post("/pet", form, option);
     const result = res.data;
-    alert(result);
     return result;
   } catch (err) {
     errorResponse(err.response.data.status, err.response.data.message);

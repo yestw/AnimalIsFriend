@@ -72,7 +72,6 @@
     async mounted() {
       const res = await petView();
       this.pets = res.data;
-      console.log(this.pets.petStatus);
     },
     methods: {
       detailPet(petId) {

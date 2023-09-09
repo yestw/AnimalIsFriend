@@ -204,9 +204,7 @@ export default {
         },
         frame => {
           this.connected = true;
-          console.log("소켓 연결 성공", frame)
           this.stompClient.subscribe(`/queue/${this.roomId}`, (res) => {
-            // console.log("구독으로 받은 메세지", res.body);
 
             const chatting = JSON.parse(res.body);
             const inputDate = new Date(chatting.createdDate);

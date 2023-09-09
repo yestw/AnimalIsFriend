@@ -182,8 +182,6 @@ export default {
 
       const uploadUrl = `${process.env.VUE_APP_S3_PATH}/${this.encodedFileName}`;
       this.imageUrl = uploadUrl;
-      console.log(this.imageUrl)
-
     },
     async registerPet() {
       await this.imageUploadS3();
@@ -213,6 +211,8 @@ export default {
         };
   
         register(registerPetForm, this.$getAccessToken());
+        alert("반려동물 등록이 완료되었습니다.");
+        this.$router.push("/");
       }
     },
   },
