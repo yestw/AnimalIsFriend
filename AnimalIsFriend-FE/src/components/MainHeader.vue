@@ -12,15 +12,15 @@
       </ul>
     </div>
     <div id="tab">
-      <div v-if="!isLogined">
-        <div class="login">
-          <button @click="goLogin()">로그인</button>
-        </div>
-      </div>
-      <div v-else>
+      <div v-if="isLogined">
         <div class="mypage">
           <button @click="logout()">로그아웃</button>
           <button @click="noService()">마이페이지</button>
+        </div>
+      </div>
+      <div v-else>
+        <div class="login">
+          <button @click="goLogin()">로그인</button>
         </div>
       </div>
     </div>
@@ -68,7 +68,6 @@ export default {
     logout() {
       document.cookie = "accessTokenCookie=; path=/; domain=.animalisfriend.shop; SameSite=None; Secure; Max-Age=0;";
       this.isLogined = false;
-      location.href = "/";
     },
     noService() {
       alert("아직 준비중인 서비스 입니다.");
