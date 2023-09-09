@@ -1,4 +1,4 @@
-BUILD_JAR=$(ls /home/ubuntu/github-actions/AnimalIsFriend-BE/build/libs/*.jar)
+BUILD_JAR=$(ls /home/ubuntu/github-actions/AnimalIsFriend-BE/build/libs/animalisfriend-0.0.1-SNAPSHOT.jar)
 JAR_NAME=$(basename $BUILD_JAR)
 echo ">>> build 파일명: $JAR_NAME" >> /home/ubuntu/github-actions/deploy.log
 
