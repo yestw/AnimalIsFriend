@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/v1/chat")
 @RequiredArgsConstructor
 @Slf4j
-public class ChatController { 
+public class ChatController {
 
 	private final ChatService chatService;
 
