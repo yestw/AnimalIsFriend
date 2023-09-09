@@ -9,7 +9,7 @@ env:
   AWS_IMAGE_BUCKET: s3-animal-is-friend
   CODEDEPLOY_NAME: animal-is-friend-github-actions
   CODEDEPLOY_GROUP: animal-is-friend-github-actions-group
-  RESOUCE_PATH: ./AnimalIsFriend/AnimalIsFriend-BE/src/main/resouces/application.yaml
+  RESOUCE_PATH: ./AnimalIsFriend-BE/src/main/resouces/application.yaml
   
 jobs:
   build:
