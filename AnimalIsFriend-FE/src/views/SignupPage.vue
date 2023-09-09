@@ -1,5 +1,6 @@
 <template>
     <div id="signupPage">
+      <h3>추가회원가입이 필요합니다. 정보를 입력해주세요.</h3>
       <div>
         <label>이름 : </label>
         <input type="text" v-model="userName">
@@ -61,7 +62,7 @@
               const res = await signUp(signupForm, this.$getAccessToken());
               if(res.data === "SIGNUP_SUCCESS") {
                 alert("회원가입이 완료되었습니다. 다시 로그인 해주세요");
-                document.cookie = "accessTokenCookie=; path=/; domain=localhost; SameSite=None; Secure; Max-Age=0;";
+                document.cookie = "accessTokenCookie=; path=/; domain=.animalisfriend.shop; SameSite=None; Secure; Max-Age=0;";
                 location.href = "/";
               }
             }

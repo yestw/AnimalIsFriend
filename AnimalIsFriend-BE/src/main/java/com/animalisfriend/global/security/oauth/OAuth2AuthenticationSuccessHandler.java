@@ -67,6 +67,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 			.sameSite("None")
 			.secure(true)
 			.maxAge(accessTokenExpireSeconds)
+				.domain(".animalisfriend.shop")
 			.build();
 
 		response.addHeader("Set-Cookie", token.toString());
