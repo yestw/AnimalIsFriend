@@ -205,6 +205,7 @@ export default {
         frame => {
           this.connected = true;
           this.stompClient.subscribe(`/queue/${this.roomId}`, (res) => {
+            console.log(frame);
 
             const chatting = JSON.parse(res.body);
             const inputDate = new Date(chatting.createdDate);
