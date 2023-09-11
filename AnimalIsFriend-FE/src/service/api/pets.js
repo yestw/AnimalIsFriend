@@ -9,7 +9,6 @@ function errorResponse(errorCode, errorMessage) {
 
 async function register(form, accessToken) {
   try{
-    alert(axios);
     const option = {
       headers: {
           Authorization: "Bearer " + accessToken,

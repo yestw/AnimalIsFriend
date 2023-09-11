@@ -212,7 +212,7 @@ export default {
   
         register(registerPetForm, this.$getAccessToken());
         alert("반려동물 등록이 완료되었습니다.");
-        this.$router.push("/");
+        location.href = "/";
       }
     },
   },

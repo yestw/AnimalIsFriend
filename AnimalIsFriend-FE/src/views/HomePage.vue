@@ -40,7 +40,7 @@ export default {
     // if(this.role === "GUEST") {
     //   this.$router.push("/signup");
     // }
-  }
+  },
 }
 </script>
 
