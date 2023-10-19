@@ -1,27 +1,17 @@
 package com.animalisfriend.domain.pets.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import org.springframework.context.annotation.Description;
-
 import com.animalisfriend.domain.pets.dto.request.PetRequestDto;
 import com.animalisfriend.domain.users.entity.Users;
 import com.animalisfriend.global.common.Converter.PetCategoryConverter;
 import com.animalisfriend.global.common.Converter.PetSizeConverter;
 import com.animalisfriend.global.common.Converter.PetStatusConverter;
 import com.animalisfriend.global.common.entity.BaseEntity;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Description;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -70,7 +60,6 @@ public class Pets extends BaseEntity {
 	@JoinColumn(name = "user_id")
 	private Users user;
 
-
 	@Builder
 	private Pets (String petName, String petGender, String petBirth, String petAcquire, String petBreed,
 		String petDescription ,String petFeed, PetCategory petCategory, PetSize petSize,
@@ -106,5 +95,14 @@ public class Pets extends BaseEntity {
 
 	public void updatePetStatus(PetStatus petStatus) {
 		this.petStatus = petStatus;
+	}
+
+	public void petUpdate(PetRequestDto.petUpdateDto dto) {
+		this.petName = dto.getPetName();
+		this.petBreed = dto.getPetBreed();
+		this.petDescription = dto.getPetDescription();
+		this.petFeed = dto.getPetFeed();
+		this.petSize = dto.getPetSize();
+		this.petStatus = dto.getPetStatus();
 	}
 }

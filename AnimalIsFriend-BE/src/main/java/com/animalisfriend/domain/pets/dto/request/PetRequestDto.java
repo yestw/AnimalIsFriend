@@ -3,6 +3,7 @@ package com.animalisfriend.domain.pets.dto.request;
 import com.animalisfriend.domain.pets.entity.PetCategory;
 import com.animalisfriend.domain.pets.entity.PetSize;
 
+import com.animalisfriend.domain.pets.entity.PetStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,5 +41,18 @@ public class PetRequestDto {
 			this.petSize = petSize;
 			this.petCategory = petCategory;
 		}
+	}
+
+	@Getter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class petUpdateDto {
+		private String petName;
+		private String petBreed;
+		private String petDescription;
+		private String petFeed;
+		private PetSize petSize;
+		private String imageUrl;
+		private PetStatus petStatus;
 	}
 }

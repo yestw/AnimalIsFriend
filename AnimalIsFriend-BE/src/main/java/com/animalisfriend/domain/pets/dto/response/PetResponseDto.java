@@ -1,23 +1,22 @@
 package com.animalisfriend.domain.pets.dto.response;
 
 import com.animalisfriend.domain.Image.entity.ImageFile;
-import com.animalisfriend.domain.pets.entity.PetCategory;
-import com.animalisfriend.domain.pets.entity.PetSize;
-import com.animalisfriend.domain.pets.entity.PetStatus;
-import com.animalisfriend.domain.pets.entity.Pets;
+import com.animalisfriend.domain.pets.entity.*;
 import com.animalisfriend.domain.users.entity.Users;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class PetResponseDto {
 
 	@Getter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class findAllPet {
+	public static class findAllPetDto {
 		private Long petId;
 		private String petName;
 		private String petGender;
@@ -33,8 +32,8 @@ public class PetResponseDto {
 		private Long id;
 		private String imageUrl;
 
-		public static findAllPet from(Pets pet, Users user, ImageFile image) {
-			return new findAllPet(
+		public static findAllPetDto from(Pets pet, Users user, ImageFile image) {
+			return new findAllPetDto(
 				pet.getPetId(),
 				pet.getPetName(),
 				pet.getPetGender(),
@@ -48,7 +47,7 @@ public class PetResponseDto {
 				pet.getPetStatus(),
 				user.getUserNickname(),
 				user.getId(),
-				image.getImageUrl()
+				image.getImageUrl()==null?"": image.getImageUrl()
 			);
 		}
 	}

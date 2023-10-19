@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="petViewWrap">
       <div id="adoptInfo">
         <h3>반려동물을 입양후 반려동물 등록은 의무입니다.</h3>
         <h4>입양을 희망하는 반려동물이 등록 되었는지 확인 하세요!</h4>
@@ -89,6 +89,10 @@
   </script>
     
 <style scoped>
+#petViewWrap {
+  width: 80%;
+}
+
 #petViewPage {
   display: flex;
   align-items: center;

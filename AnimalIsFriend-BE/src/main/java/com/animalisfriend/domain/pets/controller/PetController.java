@@ -4,14 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.animalisfriend.domain.adopt.dto.request.AdoptRequestDto;
 import com.animalisfriend.domain.pets.dto.request.PetRequestDto;
@@ -42,12 +35,12 @@ public class PetController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<PetResponseDto.findAllPet>> getAllPets(@ModelAttribute PetRequestDto.findAllPetPagination dto) {
+	public ResponseEntity<List<PetResponseDto.findAllPetDto>> getAllPets(@ModelAttribute PetRequestDto.findAllPetPagination dto) {
 		return ResponseEntity.ok().body(petService.findAllPets(dto));
 	}
 
 	@GetMapping("/{pid}")
-	public ResponseEntity<PetResponseDto.findAllPet> getPet(@PathVariable("pid") Long pid) {
+	public ResponseEntity<PetResponseDto.findAllPetDto> getPet(@PathVariable("pid") Long pid) {
 		return ResponseEntity.ok().body(petService.findPet(pid));
 	}
 
@@ -59,4 +52,23 @@ public class PetController {
 
 		return ResponseEntity.ok().body(SuccessCode.UPDATE_SUCCESS);
 	}
+
+	@DeleteMapping("/{pid}")
+	public ResponseEntity<Object> deletePet(@AuthenticationPrincipal JwtAuthentication user,
+											@PathVariable("pid") Long pid) {
+		petService.deletePet(user.userId, pid);
+
+		return ResponseEntity.ok().body(SuccessCode.DELETE_SUCCESS);
+	}
+
+	@PatchMapping("/pid")
+	public ResponseEntity<Object> updatePet(@AuthenticationPrincipal JwtAuthentication user,
+											@PathVariable("pid") Long pid,
+											@RequestBody PetRequestDto.petUpdateDto dto) {
+		petService.updatePetInfo(user.userId, pid, dto);
+
+		return ResponseEntity.ok().body(SuccessCode.UPDATE_SUCCESS);
+	}
+
+
 }

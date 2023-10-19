@@ -1,8 +1,9 @@
 package com.animalisfriend.domain.pets.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import com.animalisfriend.domain.pets.exception.PetNotMatchException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,12 +24,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PetService {
 
 	private final PetRepository petRepository;
 	private final UserRepository userRepository;
 	private final ImageFileRepository imageFileRepository;
-
 	@Transactional
 	public void petRegister(PetRequestDto.PetRegister dto, Long uid) {
 
@@ -42,32 +43,26 @@ public class PetService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<PetResponseDto.findAllPet> findAllPets(PetRequestDto.findAllPetPagination dto) {
+	public List<PetResponseDto.findAllPetDto> findAllPets(PetRequestDto.findAllPetPagination dto) {
 
-		return petRepository.findAllPet(dto)
-			.stream()
-			.map(
-				pets ->
-					PetResponseDto.findAllPet.from(
-						pets, pets.getUser(), imageFileRepository.findByPetId(pets.getPetId())
-					)
-			)
-			.collect(Collectors.toList());
+		return petRepository.findAllPet(dto);
 	}
 
 	@Transactional(readOnly = true)
-	public PetResponseDto.findAllPet findPet(Long petId) {
+	public PetResponseDto.findAllPetDto findPet(Long petId) {
 		Pets pet = petRepository.findById(petId)
 			.orElseThrow(() -> new PetNotFoundException());
 
+		Users users = userRepository.findById(pet.getUser().getId())
+				.orElseThrow(() -> new UserNotFoundException());
+
 		ImageFile image = imageFileRepository.findByPetId(pet.getPetId());
 
-		return PetResponseDto.findAllPet.from(pet, pet.getUser(), image);
+		return PetResponseDto.findAllPetDto.from(pet, users, image);
 	}
 
 	@Transactional
 	public void updatePetStatus(AdoptRequestDto.updateAdopt dto, Long userId) {
-
 
 		userRepository.findById(userId)
 			.orElseThrow(() -> new UserNotFoundException());
@@ -76,5 +71,44 @@ public class PetService {
 			.orElseThrow();
 
 		pet.updatePetStatus(PetStatus.valueOf(dto.getPetStatus()));
+	}
+
+	@Transactional
+	public void deletePet(Long userId, Long petId) {
+		Users user = userRepository.findById(userId)
+				.orElseThrow(() -> new UserNotFoundException());
+
+		petRepository.findById(petId)
+				.ifPresentOrElse(
+						pet -> validatePetForDelete(pet.getPetId(), user.getId()),
+						() -> new PetNotFoundException()
+				);
+	}
+	private void validatePetForDelete(Long userId, Long petId) {
+		petRepository.findByPetsWhereUserIdAndPetId(userId, petId)
+				.ifPresentOrElse(
+						pet -> petRepository.delete(pet),
+						() -> new PetNotMatchException()
+				);
+	}
+
+	public void updatePetInfo(Long userId, Long pid, PetRequestDto.petUpdateDto dto) {
+
+		Users user = userRepository.findById(userId)
+				.orElseThrow(() -> new UserNotFoundException());
+
+		petRepository.findById(pid)
+				.ifPresentOrElse(
+						pet -> validatePetForUpdate(user.getId(), pet.getPetId(), dto),
+						() -> new PetNotFoundException()
+				);
+	}
+
+	private void validatePetForUpdate(Long userId, Long petId, PetRequestDto.petUpdateDto dto) {
+		petRepository.findByPetsWhereUserIdAndPetId(userId, petId)
+				.ifPresentOrElse(
+						pet -> pet.petUpdate(dto),
+						() -> new PetNotMatchException()
+				);
 	}
 }
