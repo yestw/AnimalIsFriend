@@ -9,15 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.animalisfriend.domain.users.entity.Users;
 import com.animalisfriend.global.security.jwt.dto.JwtAuthentication;
-import com.animalisfriend.global.security.jwt.dto.RefreshTokenSaveRequestDto;
 import com.animalisfriend.global.security.jwt.exception.TokenExpiredException;
 import com.animalisfriend.global.security.jwt.exception.TokenInvalidException;
-import com.animalisfriend.global.security.jwt.repository.RefreshTokenRepository;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -34,20 +30,16 @@ public class JwtTokenProvider {
 
 	private final String bearerType = "Bearer ";
 
-
-	private final RefreshTokenRepository refreshTokenRepository;
 	@Value("${jwt.header.access-token}")
 	String accessTokenHeader;
 
 	public JwtTokenProvider(
 		@Value("${jwt.secret-key}") String secretKey,
 		@Value("${jwt.expire-seconds.access-token}") long accessTokenExpireSeconds,
-		@Value("${jwt.expire-seconds.refresh-token}") long refreshTokenExpireSeconds,
-		RefreshTokenRepository refreshTokenRepository) {
+		@Value("${jwt.expire-seconds.refresh-token}") long refreshTokenExpireSeconds) {
 		this.secretKey = secretKey;
 		this.accessTokenExpireSeconds = accessTokenExpireSeconds;
 		this.refreshTokenExpireSeconds = refreshTokenExpireSeconds;
-		this.refreshTokenRepository = refreshTokenRepository;
 	}
 
 	public String createAccessToken(Users user) {
@@ -93,24 +85,6 @@ public class JwtTokenProvider {
 		return extractAccessToken;
 	}
 
-	@Transactional
-	public void updateRefreshToken(Long userId, String refreshToken) {
-		refreshTokenRepository.findByUserId(userId)
-			.ifPresentOrElse(
-				token -> token.updateToken(refreshToken),
-				() -> saveRefreshToken(userId, refreshToken)
-			);
-	}
-
-	@Transactional
-	public void saveRefreshToken(Long userId, String refreshToken) {
-		RefreshTokenSaveRequestDto refreshRequest = RefreshTokenSaveRequestDto.builder()
-			.userId(userId)
-			.refreshToken(refreshToken)
-			.build();
-
-		refreshTokenRepository.save(RefreshTokenSaveRequestDto.of(refreshRequest));
-	}
 
 	public void validateToken(String token) {
 		try {

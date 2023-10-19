@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.animalisfriend.global.security.jwt.JwtTokenProvider;
-import com.animalisfriend.global.security.jwt.repository.RefreshTokenRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 public class JwtService {
 
 	private final JwtTokenProvider jwtTokenProvider;
-	private final RefreshTokenRepository refreshTokenRepository;
 
 	public Optional<String> getAccessToken(HttpServletRequest request) {
 		String accessToken = jwtTokenProvider.extractAccessToken(request)
@@ -28,10 +26,5 @@ public class JwtService {
 		}
 
 		return Optional.ofNullable(accessToken);
-	}
-
-	@Transactional
-	public void deleteRefreshToken(String refreshToken) {
-		refreshTokenRepository.deleteByRefreshToken(refreshToken);
 	}
 }

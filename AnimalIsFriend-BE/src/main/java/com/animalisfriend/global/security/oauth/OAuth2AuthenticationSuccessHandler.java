@@ -35,9 +35,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 	@Value("${jwt.expire-seconds.access-token}")
 	long accessTokenExpireSeconds;
 
-	@Value("${jwt.expire-seconds.refresh-token}")
-	long refreshTokenExpireSeconds;
-
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) throws IOException {
@@ -51,8 +48,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		);
 
 		setAccessTokenInCookie(response, accessToken);
-		setRefreshTokenInCookie(response, accessToken);
-
 
 		if(oAuth2User.getUser().getRole() == UserRole.GUEST) {
 			targetUrl+="/signup";
@@ -68,18 +63,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 			.secure(true)
 			.maxAge(accessTokenExpireSeconds)
 				.domain(".animalisfriend.shop")
-			.build();
-
-		response.addHeader("Set-Cookie", token.toString());
-	}
-
-	private void setRefreshTokenInCookie(HttpServletResponse response, String refreshToken) {
-		ResponseCookie token = ResponseCookie.from("refreshTokenCookie", refreshToken)
-			.path(getDefaultTargetUrl())
-			.sameSite("None")
-			.httpOnly(true)
-			.secure(true)
-			.maxAge(refreshTokenExpireSeconds)
 			.build();
 
 		response.addHeader("Set-Cookie", token.toString());
