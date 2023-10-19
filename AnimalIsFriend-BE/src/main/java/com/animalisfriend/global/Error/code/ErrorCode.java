@@ -63,6 +63,7 @@ public enum ErrorCode {
 
 	//pet
 	PET_NOT_FOUND(404, "P001", "반려동물이 존재하지 않습니다."),
+	PET_NOT_MATCH(500, "P002", "사용자가 등록한 반려동물이 아닙니다."),
 
 	//chatroom
 	CHATROOM_ALREADY_EXIST(500, "R001", "이미 채팅방이 존재합니다."),
