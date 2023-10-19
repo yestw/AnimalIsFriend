@@ -15,9 +15,9 @@ group = 'com.animalisfriend'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = '11'
 }
- 
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
