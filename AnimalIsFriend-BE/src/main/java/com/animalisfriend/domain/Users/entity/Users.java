@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.animalisfriend.domain.users.dto.UserSignupRequestDto;
+import com.animalisfriend.domain.users.dto.UserUpdateRequestDto;
 import com.animalisfriend.global.common.entity.BaseEntity;
 
 import lombok.Builder;
@@ -50,11 +51,18 @@ public class Users extends BaseEntity {
 		this.role = role;
 	}
 
+	//추가정보 회원가입
 	public void userUpdate(UserSignupRequestDto dto) {
 		this.userName = dto.getUserName();
 		this.userHp = dto.getUserHp();
 		this.userGender = dto.getUserGender();
 		this.userAddress = dto.getUserAddress();
 		this.role = UserRole.USER;
+	}
+
+	public void userInfoUpdate(UserUpdateRequestDto dto) {
+		this.userName = dto.getUserName();
+		this.userHp = dto.getUserHp();
+		this.userAddress = dto.getUserAddress();
 	}
 }
