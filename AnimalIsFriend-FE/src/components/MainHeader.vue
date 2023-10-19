@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <div id="logo">
-      <p @click="goHome()">AnimalIF</p>
+      <img src="../assets/logo.png" width="150px" height="150px" @click="goHome()">
     </div>
     <div id="menu">
       <ul class="menu-ul">
@@ -104,7 +104,7 @@ button:hover {
   align-items: center;
   justify-content: center;
   border-radius: 50px;
-  margin-right: 30px;
+  margin-right: 100px;
 }
 
 #logo:hover {
