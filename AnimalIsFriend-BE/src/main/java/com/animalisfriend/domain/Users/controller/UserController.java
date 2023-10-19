@@ -1,11 +1,9 @@
 package com.animalisfriend.domain.users.controller;
 
+import com.animalisfriend.domain.users.dto.UserUpdateRequestDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.animalisfriend.domain.users.dto.UserSignupRequestDto;
 import com.animalisfriend.domain.users.service.UserService;
@@ -29,5 +27,22 @@ public class UserController {
 
 		userService.signup(dto, user.userId);
 		return ResponseEntity.ok().body(SuccessCode.SIGNUP_SUCCESS);
+	}
+
+	//회원탈퇴
+	@DeleteMapping
+	public ResponseEntity<Object> withdrawalMembership(@AuthenticationPrincipal JwtAuthentication user) {
+		userService.withdrawalMembership(user.userId);
+
+		return ResponseEntity.ok().body(SuccessCode.DELETE_SUCCESS);
+	}
+	
+	//회원수정
+	@PatchMapping
+	public ResponseEntity<Object> updateUser(@AuthenticationPrincipal JwtAuthentication user,
+											 @RequestBody UserUpdateRequestDto dto) {
+		userService.updateUser(dto, user.userId);
+
+		return ResponseEntity.ok().body(SuccessCode.UPDATE_SUCCESS);
 	}
 }
